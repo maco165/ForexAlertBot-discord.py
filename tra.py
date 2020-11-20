@@ -31,7 +31,7 @@ if FTT<0:
 else:
     print('H1変動率 ' +'+'+ str(round((abs(FTT)/float(r.get('candles')[0]["mid"]["o"])*100),2))+'% ')
 
-
+print('tetta')
 
 
 
