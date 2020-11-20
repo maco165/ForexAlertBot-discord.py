@@ -13,7 +13,7 @@ import oandapyV20.endpoints.orders as orders
 import oandapyV20.endpoints.instruments as instruments
 import oandapyV20.endpoints.accounts as accounts
 import json
-
+print('tetta VB')
 accountID = "101-009-11751917-001"
 access_token = '37277419e9d76f868cd3aef00ff49a95-ecf460f98e0f704098009ae5698a1017'
 TOKEN = 'NzQ5MTg1NTc2MTQ1NzgwNzk3.X0oTcA.MeiblwQQL1wZJah1cYIZ9BbSRF8' 
