@@ -3,7 +3,6 @@ import discord
 import requests
 import json
 from bitflyer import public
-import trade
 import sys
 import threading
 import time

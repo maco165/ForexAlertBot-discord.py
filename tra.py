@@ -4,7 +4,6 @@ from discord.ext import tasks
 import requests
 import json
 from bitflyer import public
-import trade
 import datetime
 import time
 
@@ -18,7 +17,7 @@ import oandapyV20.endpoints.accounts as accounts
 accountID = "101-009-11751917-001"
 access_token = '37277419e9d76f868cd3aef00ff49a95-ecf460f98e0f704098009ae5698a1017'
 TOKEN = 'NzQ5MTg1NTc2MTQ1NzgwNzk3.X0oTcA.MeiblwQQL1wZJah1cYIZ9BbSRF8' 
-CHANNEL_ID = 626082725669109760
+CHANNEL_ID = 668864142312210453
 client =discord.Client()
 
 def GetCandle(Count,Currncy):
@@ -31,14 +30,13 @@ def GetCandle(Count,Currncy):
 def ReadyMessage(ftt,r,Currncy,embed):
     FTT= float(r.get('candles')[ftt]["mid"]["c"])-float(r.get('candles')[0]["mid"]["o"])
     if FTT<0:
-        embed.add_field(name=Currncy,value=str(r.get('candles')[0]['time'].split('.')[0].split('T')[0]),inline=False)
+        embed.add_field(name=Currncy,value='-----',inline=False)
         embed.add_field(name="OPEN RATE",value=str(r.get('candles')[0]["mid"]["o"]),inline=True)
         embed.add_field(name="CLOSE RATE",value=str(r.get('candles')[7]["mid"]["c"]),inline=True)
         embed.add_field(name="FTT",value=':chart_with_downwards_trend:'+str(round(FTT,2)*10)+ 'Pips ('+ str(round((abs(FTT)/float(r.get('candles')[0]["mid"]["o"])*100),2))+'%)')
         return embed
     else:
-        embed = discord.Embed(title=" Forex Report ",color=0xff0000)
-        embed.add_field(name=Currncy,value=str(r.get('candles')[0]['time'].split('.')[0].split('T')[0]),inline=False)
+        embed.add_field(name=Currncy,value='-----',inline=False)
         embed.add_field(name="OPEN RATE",value=str(r.get('candles')[0]["mid"]["o"]),inline=True)
         embed.add_field(name="CLOSE RATE",value=str(r.get('candles')[7]["mid"]["c"]),inline=True)
         embed.add_field(name="FTT",value=':chart_with_upwards_trend:'+str(round(FTT,2)*10)+ 'Pips ('+ str(round((abs(FTT)/float(r.get('candles')[0]["mid"]["o"])*100),2))+'%)')
@@ -46,14 +44,23 @@ def ReadyMessage(ftt,r,Currncy,embed):
 
 @client.event
 async def on_ready():
-  while True:
-    api = API(access_token=access_token, environment="practice")
-    params = {"count": 8,"granularity": "H1"} 
-    r = instruments.InstrumentsCandles(instrument="GBP_JPY", params=params)
-    r = api.request(r)
-    await channel.send(r)  
-    print('1')
-    time.sleep(5)
+    while True:
+        channel = client.get_channel(CHANNEL_ID)
+        #
+        #USDJPY
+        r = GetCandle(8,"USD_JPY")
+        embed = discord.Embed(title=":money_with_wings: Forex [JAPANTIME] Report :money_with_wings: ("+str(r.get('candles')[0]['time'].split('.')[0].split('T')[0])+')',color=0xff0000)
+        Send = ReadyMessage(7,r,"USDJPY",embed) 
+        #EURDJPY
+        r = GetCandle(8,"EUR_JPY")
+        Send = ReadyMessage(7,r,"EURJPY",embed) 
+        #GBPJPY
+        r = GetCandle(8,"GBP_JPY")
+        Send = ReadyMessage(7,r,"GBPJPY",embed) 
+        await channel.send(embed=Send)
+        time.sleep(5)
+
+client.run(TOKEN) 
 
 '''
 
@@ -80,9 +87,7 @@ async def on_ready():
 @tasks.loop(seconds=1)
 async def loop():
     #USDJPY
-    r = GetCandle(8,"USD_JPY")
-    embed = discord.Embed(title=" Forex Report ",color=0xff0000)
-    Send = SendMessage(7,r,"USDJPY") 
+
     print(channel)
     
     await channel.send('1')
