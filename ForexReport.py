@@ -47,6 +47,7 @@ def VolAlert(r,Now,Currncy):
     
 @client.event
 async def on_ready():
+    counter = 0
     while True:
         Now=str(datetime.datetime.now(pytz.timezone('Asia/Tokyo'))).split(' ')[1].split('.')[0]
         channel = client.get_channel(CHANNEL_ID)
