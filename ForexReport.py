@@ -23,17 +23,17 @@ def ReadyMessage(ftt,r,Currncy,embed):
         embed.add_field(name=Currncy,value='-----',inline=False)
         embed.add_field(name="OPEN RATE",value=str(r.get('candles')[0]["mid"]["o"]),inline=True)
         embed.add_field(name="CLOSE RATE",value=str(r.get('candles')[7]["mid"]["c"]),inline=True)
-        embed.add_field(name="FTT",value=':chart_with_downwards_trend:'+str(round(abs(FTT),2)*10)+ 'Pips ('+ str(round((abs(FTT)/float(r.get('candles')[0]["mid"]["o"])*100),2))+'%)')
+        embed.add_field(name="FTT",value=':chart_with_downwards_trend:'+str(round(FTT,2)*100)+ 'Pips ('+ str(round((abs(FTT)/float(r.get('candles')[0]["mid"]["o"])*100),2))+'%)')
         return embed
     else:
         embed.add_field(name=Currncy,value='-----',inline=False)
         embed.add_field(name="OPEN RATE",value=str(r.get('candles')[0]["mid"]["o"]),inline=True)
         embed.add_field(name="CLOSE RATE",value=str(r.get('candles')[7]["mid"]["c"]),inline=True)
-        embed.add_field(name="FTT",value=':chart_with_upwards_trend:'+str(round(abs(FTT),2)*10)+ 'Pips ('+ str(round((abs(FTT)/float(r.get('candles')[0]["mid"]["o"])*100),2))+'%)')
+        embed.add_field(name="FTT",value=':chart_with_upwards_trend:'+str(round(FTT,2)*100)+ 'Pips ('+ str(round((abs(FTT)/float(r.get('candles')[0]["mid"]["o"])*100),2))+'%)')
         return embed
 def VolAlert(r,Now,Currncy):
     FTT= float(r.get('candles')[14]["mid"]["c"])-float(r.get('candles')[0]["mid"]["o"])
-    if round(abs(FTT),2)*100>5:
+    if round(abs(FTT),2)*100>10:
         if FTT<0:
             embed = discord.Embed(title="PRICE ALERT ("+Now+')')
             embed.add_field(name=Currncy,value=':chart_with_downwards_trend:'+str(round(abs(FTT),2)*100)+' Pips',inline=False)
