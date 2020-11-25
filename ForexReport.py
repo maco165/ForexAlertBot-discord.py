@@ -62,7 +62,7 @@ async def on_ready():
             else:
                 embed.set_thumbnail(url="https://moneymunch.com/wp-content/uploads/2016/09/01-USD-JPY.png")
                 await channel.send(embed=embed)
-                counter=600
+                counter=900
             r = GetCandle(15,"EUR_JPY","M1")
             embed = VolAlert(r,Now,'EURJPY')
             if embed == 0:
@@ -70,7 +70,7 @@ async def on_ready():
             else:
                 embed.set_thumbnail(url="https://i-invdn-com.akamaized.net/news/EUR-JPY_2_800x533_L_1417097360.jpg")
                 await channel.send(embed=embed)
-                counter=600
+                counter=900
             r = GetCandle(15,"GBP_JPY","M1")
             embed = VolAlert(r,Now,'GBPJPY')
             if embed == 0:
@@ -78,7 +78,7 @@ async def on_ready():
             else:
                 embed.set_thumbnail(url="https://i-invdn-com.akamaized.net/news/GBP-JPY_2_800x533_L_1417097677.jpg")
                 await channel.send(embed=embed)
-                counter=600
+                counter=900
 
         #定期アラート
         #JAPANTIME
