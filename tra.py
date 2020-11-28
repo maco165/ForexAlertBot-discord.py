@@ -7,6 +7,10 @@ from bitflyer import public
 import datetime
 import time
 import pytz
+import matplotlib.pyplot as plt
+import mplfinance as mpf
+import pandas_datareader.data as dr
+import pandas as pd
 
 from oandapyV20 import API
 from oandapyV20.exceptions import V20Error
@@ -60,41 +64,57 @@ def VolAlert(r,Now,Currncy):
 
 @client.event
 async def on_ready():
-    counter = 0
     while True:
-        Now=str(datetime.datetime.now(pytz.timezone('Asia/Tokyo'))).split(' ')[1].split('.')[0]
         channel = client.get_channel(CHANNEL_ID)
-        if counter >0:
-            counter -= 1
-        print(counter)
-        if counter == 0:
-            r = GetCandle(15,"USD_JPY","M1")
-            embed = VolAlert(r,Now,'USDJPY')
-            if embed == 0:
-                pass 
-            else:
-                embed.set_thumbnail(url="https://moneymunch.com/wp-content/uploads/2016/09/01-USD-JPY.png")
-                await channel.send(embed=embed)
-                counter=600
-            r = GetCandle(15,"EUR_JPY","M1")
-            embed = VolAlert(r,Now,'EURJPY')
-            if embed == 0:
-                pass 
-            else:
-                embed.set_thumbnail(url="https://i-invdn-com.akamaized.net/news/EUR-JPY_2_800x533_L_1417097360.jpg")
-                await channel.send(embed=embed)
-                counter=600
-            r = GetCandle(15,"GBP_JPY","M1")
-            embed = VolAlert(r,Now,'GBPJPY')
-            if embed == 0:
-                pass 
-            else:
-                embed.set_thumbnail(url="https://i-invdn-com.akamaized.net/news/GBP-JPY_2_800x533_L_1417097677.jpg")
-                await channel.send(embed=embed)
-                counter=600
-        time.sleep(1)
-
+        r = GetCandle(100,"USD_JPY","M1")
+        df = pd.DataFrame({'open': [], 'high': [], 'low': [],'close': []},index=[])
+        for i in range(100):
+            df.loc[pd.to_datetime(r.get('candles')[i]["time"].split('.')[0].split('T')[1])] = [float(r.get('candles')[i]["mid"]["o"]),float(r.get('candles')[i]["mid"]["h"]),float(r.get('candles')[i]["mid"]["l"]),float(r.get('candles')[i]["mid"]["c"])]
+        mpf.plot(df,type='candle',savefig='candlestick_mpf.png')  
+        await channel.send('USDJPY')
+        await channel.send(file=discord.File('candlestick_mpf.png'))
 client.run(TOKEN) 
+
+
+
+
+# @client.event
+# async def on_ready():
+#     counter = 0
+#     while True:
+#         Now=str(datetime.datetime.now(pytz.timezone('Asia/Tokyo'))).split(' ')[1].split('.')[0]
+#         channel = client.get_channel(CHANNEL_ID)
+#         if counter >0:
+#             counter -= 1
+#         print(counter)
+#         if counter == 0:
+#             r = GetCandle(15,"USD_JPY","M1")
+#             embed = VolAlert(r,Now,'USDJPY')
+#             if embed == 0:
+#                 pass 
+#             else:
+#                 embed.set_thumbnail(url="https://moneymunch.com/wp-content/uploads/2016/09/01-USD-JPY.png")
+#                 await channel.send(embed=embed)
+#                 counter=600
+#             r = GetCandle(15,"EUR_JPY","M1")
+#             embed = VolAlert(r,Now,'EURJPY')
+#             if embed == 0:
+#                 pass 
+#             else:
+#                 embed.set_thumbnail(url="https://i-invdn-com.akamaized.net/news/EUR-JPY_2_800x533_L_1417097360.jpg")
+#                 await channel.send(embed=embed)
+#                 counter=600
+#             r = GetCandle(15,"GBP_JPY","M1")
+#             embed = VolAlert(r,Now,'GBPJPY')
+#             if embed == 0:
+#                 pass 
+#             else:
+#                 embed.set_thumbnail(url="https://i-invdn-com.akamaized.net/news/GBP-JPY_2_800x533_L_1417097677.jpg")
+#                 await channel.send(embed=embed)
+#                 counter=600
+#         time.sleep(1)
+
+# client.run(TOKEN) 
 
 '''
     while True:
