@@ -4,6 +4,8 @@ import discord
 import pytz
 from oandapyV20 import API
 import oandapyV20.endpoints.instruments as instruments
+import pandas as pd
+import mplfinance as mpf
 
 accountID = "101-009-11751917-001"
 access_token = '37277419e9d76f868cd3aef00ff49a95-ecf460f98e0f704098009ae5698a1017'
