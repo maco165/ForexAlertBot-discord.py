@@ -1,4 +1,4 @@
-# Forex-bot-for-discord
+# FOREX ALERT BOT FOR DISCORD
 OANDAのAPIを用いて為替レートを取得してDiscodeで通知するBotです
 
 機能: 
