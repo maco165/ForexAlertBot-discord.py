@@ -12,7 +12,7 @@ OANDAのAPIを用いて為替レート(USDJPY・EURJPY・GBPJPY)を取得してD
 
   - 相場の急変動を感知して通知する機能
 
-![image](https://user-images.githubusercontent.com/30610407/111451932-500e0c80-8755-11eb-9761-bc8ddf3ba6ee.png)
+![image](https://user-images.githubusercontent.com/30610407/111452736-2acdce00-8756-11eb-8e2a-4f2f419368b7.png)
 
 ## LICENCE
 このリポジトリのコードを製作者(@mtgoxtvmax)の許可なく使用・公開することを一切禁止します。
