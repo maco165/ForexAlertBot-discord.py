@@ -7,10 +7,10 @@ import oandapyV20.endpoints.instruments as instruments
 import pandas as pd
 import mplfinance as mpf
 
-accountID = " "
-access_token = ' '
-TOKEN = ' ' 
-CHANNEL_ID = 
+accountID = # " oanda account id "
+access_token = # 'oanda token'
+TOKEN = # 'Discord Token' 
+CHANNEL_ID = # Discord channel id
 client =discord.Client()
 
 def GetCandle(Count,Currncy,CandleTime):
@@ -64,7 +64,7 @@ async def on_ready():
         if Theweek.strftime('%a') == 'Sat' or Theweek.strftime('%a') == 'Sun':
             pass
         else:
-            #変動アラート
+            #Fluctuation alert(変動アラート)
             if counter >0:
                 counter -= 1
             if counter == 0:
@@ -102,7 +102,7 @@ async def on_ready():
                     await channel.send(file=discord.File('candlestick_mpf.png'))
                     counter=900
 
-            #定期アラート
+            #Regular alert(定期アラート)
             #JAPANTIME
             if Now == '17:00:00':
                 r = GetCandle(8,"USD_JPY","H1")
