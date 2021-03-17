@@ -1,14 +1,5 @@
 # Forex-bot-for-discord
+OANDAのAPIを用いて為替レートを取得してDiscodeで通知するBotです。
 
-概要
-
-## Description
-詳細の説明
-
-## Usage
-用途
-
-
-## Install
-インストール方法
-
+## LICENCE
+このリポジトリのコードを製作者(@mtgoxtvmax)の許可なく使用・公開することを一切禁止します。
