@@ -1,5 +1,5 @@
 # FOREX ALERT BOT FOR DISCORD
-OANDAのAPIを用いて為替レート(USDJPY・EURJPY・GBPJPY)を取得してDiscodeで通知するBotです
+OANDAのAPIを用いて為替レート(USDJPY・EURJPY・GBPJPY)を定期的に通知するDisco Botです
 
 機能: 
 
