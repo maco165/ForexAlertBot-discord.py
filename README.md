@@ -1,5 +1,6 @@
 # FOREX ALERT BOT FOR DISCORD
-OANDAのAPIを用いて為替レート(USDJPY・EURJPY・GBPJPY)を定期的に通知するDiscord Botです
+
+為替レート(USDJPY・EURJPY・GBPJPY)を定期的に通知するDiscord Botです
 
 機能: 
 
