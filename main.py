@@ -6,11 +6,12 @@ from oandapyV20 import API
 import oandapyV20.endpoints.instruments as instruments
 import pandas as pd
 import mplfinance as mpf
+import os
 
-accountID = # " oanda account id "
-access_token = # 'oanda token'
-TOKEN = # 'Discord Token' 
-CHANNEL_ID = # Discord channel id
+accountID = os.environ.get('OANDA_ACCOUNT_ID')
+access_token = os.environ.get('OANDA_TOKEN')
+TOKEN = os.environ.get('DISCODE_TOKEN')
+CHANNEL_ID = os.environ.get('DISCODE_CAHNNEL')
 client =discord.Client()
 
 def GetCandle(Count,Currncy,CandleTime):
