@@ -1,7 +1,12 @@
 # GitHub Pages (Jekyll) の設定。言語、OGP 画像、sitemap だけを指定する
 lang: ja
-image: /assets/og.png
 twitter:
   card: summary_large_image
 plugins:
   - jekyll-sitemap
+# jekyll-seo-tag はページの image を og:image にするので、全ページの既定に入れる
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/og.png
